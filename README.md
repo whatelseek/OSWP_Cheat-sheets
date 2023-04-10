@@ -1,5 +1,13 @@
 # OSWP cheat sheets
 
+##Monitoring
+
+
+
+
+
+
+
 ## WEP attack
 
 
@@ -52,4 +60,12 @@ sudo dhclient <interface>
 ```
 
 sudo dhclient <interface>
+```
+
+## Other
+### MAC-spoofing
+```
+ip link set dev <interface> down
+ip link set dev <interface> address <XX:XX:XX:XX:XX:XX>
+ip link set dev <interface> up
 ```
