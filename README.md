@@ -20,7 +20,7 @@ iwconfig wlan0 channel <channel>
 Catch beacon with ESSID
 ```
 aireplay-ng -0 <deauth number> -a <AP MAC> <interface> 
-aireplay-ng -0 <deauth number> -a <AP MAC> -c <Client MAC> <interface> #Some clients ignore broadcast deauthentications. If this is the case, you will need to send a deauthentication directed at the particular client.
+aireplay-ng -0 <deauth number> -a <AP MAC> -c <Client MAC> <interface> # Some clients ignore broadcast deauthentications. If this is the case, you will need to send a deauthentication directed at the particular client.
 ```
 
 
