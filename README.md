@@ -29,6 +29,7 @@ aireplay-ng -0 <deauth number> -a <AP MAC> -c <Client MAC> <interface> #Some cli
 
 ## WPS attack
 **Dependencies:** reaver
+
 _Some APs have protections. AP might have PIN timeout after a series of failures. These APs then require either a timeout or a reset to remove the lock._
 
 ### Custom PIN association 
