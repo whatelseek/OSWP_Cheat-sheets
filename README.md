@@ -1,1 +1,1 @@
-# OSWP cheat sheets
+# OSWP cheat sheet
