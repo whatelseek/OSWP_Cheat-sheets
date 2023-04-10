@@ -25,16 +25,25 @@
 
 ## Connect to AP
 
-Open
+###Open
 ```
-sudo iw wlan0 connect <SSID>
+sudo iw wlan0 connect <ESSID>
+sudo dhclient wlan0
 ```
 
+###WEP
+```
+sudo iw wlan0 connect <ESSID> key 0:<key>
+sudo dhclient wlan0
+```
 
-WEP
+###WPA2
 
-WPA2
+```
 
-WPA enterprise
+sudo dhclient wlan0
+```
+
+###WPA enterprise
 
 
