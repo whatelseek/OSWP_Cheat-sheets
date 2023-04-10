@@ -29,9 +29,7 @@ aireplay-ng -0 <deauth number> -a <AP MAC> -c <Client MAC> <interface> #Some cli
 
 ## WPS attack
 **Dependencies:** reaver
-
-Some APs have protections to frustrate WPS attacks. AP might timeout for 60 seconds after a series of failures, or it may exponentially increase the time before the next try. These APs then require either a timeout or a reset to remove the lock. Over the next few years, a few tools managed to get around the issue by figuring out the algorithm used to generate the default PIN of various APs.
-The PixieWPS3 attack, disclosed in 2014, takes advantage of the weak random number generator used in a few chipsets, which means not all WPS implementations are vulnerable. As opposed to the brute force technique, this technique requires minimal interaction with the AP to gather the data needed for the attack, which is then brute forced offline. The current version of reaver, which has been forked from the original and subsequently improved on, integrates the PixieWPS attack.
+_Some APs have protections. AP might have PIN timeout after a series of failures. These APs then require either a timeout or a reset to remove the lock._
 
 ### Custom PIN association 
  
