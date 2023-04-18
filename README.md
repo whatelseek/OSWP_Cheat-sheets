@@ -2,6 +2,8 @@
 
 This cheat sheet based on "WiFi Hacking Mind Map - v1.0 by Jérémy Brun-Nouvion (https://github.com/koutto)"
 
+Alsoo see my wifu.sh (to make all tasks easier)
+
 ## Monitoring
 ### Find all AP and connected devices
 ```
